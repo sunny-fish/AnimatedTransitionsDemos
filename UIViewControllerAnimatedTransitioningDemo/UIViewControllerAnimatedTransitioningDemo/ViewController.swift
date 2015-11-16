@@ -24,7 +24,7 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 //
-//  This simple expample demonstrates how a view controller can supply its own 
+//  This simple example demonstrates how a view controller can supply its own 
 //  transitioning animation.
 
 import UIKit
@@ -96,7 +96,7 @@ class ViewController: UIViewController, SelfAnimatedTransitioning {
 		// in completion.
 	}
 
-	// Create the animaiton for leaving.
+	// Create the animation for leaving.
 	func performLevaingAnimaitonInContainerView(containerView: UIView, completion: (Bool)->()) {
 
 		// The transitioning context has a view where the animation should be drawn.

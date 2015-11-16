@@ -1,6 +1,6 @@
 //
-//  SelfAnimatedTransitioningProtocol.swift
-//  UIViewControllerAnimatedTransitioningDemo
+//  ViewController.swift
+//  UIViewControllerInteractiveTransitioningDemo
 //
 //  Created by Sunny Fish LLC on 11/12/15.
 //  This is free and unencumbered software released into the public domain.
@@ -23,22 +23,34 @@
 //  ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-//
-//  This protocol defines what a view controller needs to supply its aniamations
-//  to a animated transition.
+//  All the interesting stuff happens over in the InteractiveTransition class.
+//  Here we just have outlets for the button and the button's action.
+//  The only slightly interesting thing in here is the use of a IBInspectable
+//  as part of adjusting the status bar to make sure it's visible.
 
 import UIKit
 
-protocol SelfAnimatedTransitioning {
+class ViewController: UIViewController {
 
-	// How long should the animations last.
-	var leavingAnimaitonDuration: NSTimeInterval { get }
-	var arrivingAnimationDuration: NSTimeInterval { get }
+	@IBOutlet weak var button: UIButton!
+	@IBInspectable var lightBackground: Bool = true
 
-	// Create the animation for arriving.
-	func performArrivingAnimationInContainerView(containerView: UIView, completion: (Bool)->())
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		setNeedsStatusBarAppearanceUpdate()
+	}
 
-	// Create the animation for leaving.
-	func performLevaingAnimaitonInContainerView(containerView: UIView, completion: (Bool)->())
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		if lightBackground {
+			return .Default
+		} else {
+			return .LightContent
+		}
+	}
+
+	@IBAction func buttonTapped(sender:UIButton) {
+		self.navigationController?.popViewControllerAnimated(true)
+	}
 
 }
+
